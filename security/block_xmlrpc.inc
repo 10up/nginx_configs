@@ -22,6 +22,6 @@ location ~* xmlrpc.php$ {
 	## All other connections are allowed ##
 
 	# Parse the PHP - this cannot be included in an if block
-	include nginx_configs/includes/php.conf;
+	include nginx_configs/includes/php.inc;
 
 }
