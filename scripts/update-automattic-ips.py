@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Update list of Automattic's IP addresses from ARIN to lock-down Nginx
+# Update list of Automattic's IP addresses from ARIN
 # Run: python -uB scripts/update-automattic-ips.py | tee security/automatticips.inc
 # Complains: isaac.uribe@10up.com
 
