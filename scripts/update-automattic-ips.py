@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-# Update list of Automattic's IP(v4) addresses for Nginx filtering
-# Run: python -uB scripts/update-automattic-ips.py | tee security/automatticips.conf
+# Update list of Automattic's IP addresses from ARIN to lock-down Nginx
+# Run: python -uB scripts/update-automattic-ips.py | tee security/automatticips.inc
 # Complains: isaac.uribe@10up.com
 
 import netaddr
@@ -11,8 +11,8 @@ from jinja2 import Template
 
 cidrs = []
 org_data = xmltodict.parse(urllib2.urlopen('http://whois.arin.net/rest/org/AUTOM-93/nets').read())
-for thing in org_data['nets']['netRef']:
-    net_data = xmltodict.parse(urllib2.urlopen(thing['#text']).read())
+for net in org_data['nets']['netRef']:
+    net_data = xmltodict.parse(urllib2.urlopen(net['#text']).read())
     cidrs.append('%s/%s' % (net_data['net']['startAddress'], net_data['net']['netBlocks']['netBlock']['cidrLength']))
 
 print Template("""
