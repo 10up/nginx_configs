@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Update list of Automattic's IP addresses from ARIN
+# Update list of Automattic's IP addresses from ARIN to lock-down Nginx
 # Run: python -uB scripts/update-automattic-ips.py | tee security/automatticips.inc
 # Complains: isaac.uribe@10up.com
 
@@ -9,12 +9,14 @@ import urllib2
 import xmltodict
 from jinja2 import Template
 
+# Pulling from ARIN and cycling through their own definition of networks
 cidrs = []
 org_data = xmltodict.parse(urllib2.urlopen('http://whois.arin.net/rest/org/AUTOM-93/nets').read())
 for net in org_data['nets']['netRef']:
     net_data = xmltodict.parse(urllib2.urlopen(net['#text']).read())
     cidrs.append('%s/%s' % (net_data['net']['startAddress'], net_data['net']['netBlocks']['netBlock']['cidrLength']))
 
+# Generate Nginx include file, compressing networks in case there are overlapping networks.
 print Template("""
 # Note that using the Automattic IP to match can be dangerous. This is the most secure method,
 # but must be frequently updated with new IP addresses (see 'scripts/update-automattic-ips.py').
