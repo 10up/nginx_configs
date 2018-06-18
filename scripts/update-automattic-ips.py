@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Update list of Automattic's IP addresses from ARIN to lock-down Nginx
+# Update list of Automattic's IP addresses to lock-down Nginx
 # Run: python -uB scripts/update-automattic-ips.py | tee security/automatticips.inc
 # Complains: isaac.uribe@10up.com
 
@@ -8,9 +8,25 @@ import netaddr
 import urllib2
 import xmltodict
 from jinja2 import Template
+import socket
+import re
+
+def whois_query(whoisServer, query):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((whoisServer, 43))
+    s.send("%s\r\n" % query)
+    result = ""
+    while True:
+        buffer = s.recv(512)
+        if not buffer:
+            break
+        result += buffer.replace("\r\n", "\n")
+    return result
+
+# Pulling from RADB's Whois
+cidrs = re.findall(r'[a-f0-9\.:\[\]]+/[0-9]+', whois_query('whois.radb.net', '-i origin AS2635'), re.IGNORECASE)
 
 # Pulling from ARIN and cycling through their own definition of networks
-cidrs = []
 org_data = xmltodict.parse(urllib2.urlopen('http://whois.arin.net/rest/org/AUTOM-93/nets').read())
 for net in org_data['nets']['netRef']:
     net_data = xmltodict.parse(urllib2.urlopen(net['#text']).read())
