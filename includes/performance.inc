@@ -1,7 +1,7 @@
 	# Performance settings
 
-	# gzip compression
-	gzip on;
+    # gzip compression
+    gzip on;
     gzip_disable "msie6";
     gzip_vary on;
     gzip_proxied any;
