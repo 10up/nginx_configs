@@ -1,4 +1,4 @@
-	# Performance settings
+    # Performance settings
 
     # gzip compression
     gzip on;
