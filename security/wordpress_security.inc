@@ -34,7 +34,7 @@ location ~* (/license.txt|/phpmyadmin|/ckeditor|/hp/|/cfdocs/|/cfappman/|/SiteSe
 
 
 # Block by file type
-location ~* \.(sql|sql\.gz|tar|tar\.gz|lzma|pem|cer|crt|key|jks|asp|aspx|cgi|pwd|nsf|exe|sh|csh|pl|tmp|swp)$ {
+location ~* \.(sql|sql\.gz|sql\.zip|tar|tar\.gz|lzma|pem|cer|crt|key|jks|asp|aspx|cgi|pwd|nsf|exe|sh|csh|pl|tmp|swp)$ {
 	return 301 $redirect_to;
 }
 
