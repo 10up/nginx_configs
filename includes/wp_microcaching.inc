@@ -3,7 +3,7 @@
         fastcgi_ignore_headers Cache-Control Expires Vary;
 
         #Cache everything by default
-        set $no_cache 1;
+        set $no_cache 0;
 
         #Don't cache logged in users or commenters
         if ( $http_cookie ~* "comment_author_|wordpress_(?!test_cookie)|wp-postpass_" ) {
