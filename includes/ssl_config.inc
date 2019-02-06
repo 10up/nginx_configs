@@ -10,4 +10,4 @@
         resolver                  8.8.8.8;
 
         # HSTS (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security#Preloading_Strict_Transport_Security)
-        add_header Strict-Transport-Security "max-age=31536000; preload
+        add_header Strict-Transport-Security "max-age=31536000; preload";
