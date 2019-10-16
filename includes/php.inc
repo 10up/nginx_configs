@@ -3,7 +3,10 @@
 	#NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
 
 	include /etc/nginx/fastcgi_params;
-	fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+	
+	# "php" is defined as an upstream server in nginx.conf 
+	fastcgi_pass php;
+
 	fastcgi_index index.php;
 	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 
