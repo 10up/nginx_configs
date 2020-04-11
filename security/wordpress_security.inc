@@ -18,17 +18,17 @@ location ~ ~$ { deny all; }
 location ~* wp-admin/includes { deny all; }
 location ~* wp-includes/theme-compat/ { deny all; }
 location ~* wp-includes/js/tinymce/langs/.*\.php { deny all; }
-location ~* wp-includes/js/swfupload/swfupload.swf { deny all; }
-location ~* ^/wp-includes/js/mediaelement/.*.swf$ { deny all; }
+location ~* wp-includes/js/swfupload/swfupload\.swf { deny all; }
+location ~* ^/wp-includes/js/mediaelement/.*\.swf$ { deny all; }
 
 # Deny access to .php files in the /wp-content/ directory (including sub-folders)
-location ~* ^/wp-content/.*.(php|phps)$ { return 301 $redirect_to; }
+location ~* ^/wp-content/.*\.(php|phps)$ { return 301 $redirect_to; }
 
 # Deny access to any files with a .php extension in the uploads directory (redundant with previous rule)
-location ~* ^/wp-content/uploads/.*.php$ { return 301 $redirect_to; }
+location ~* ^/wp-content/uploads/.*\.php$ { return 301 $redirect_to; }
 
 # Block common exploit requests
-location ~* (/license.txt|/phpmyadmin|/ckeditor|/hp/|/cfdocs/|/cfappman/|/SiteServer/|/webmail/|/nsn/|/servlet|/etc/passwd|/phpbb|/horde/|/administrator/|phpinfo|info.php/|/cbms/|/readme.html) {
+location ~* (/license\.txt|/phpmyadmin|/ckeditor|/hp/|/cfdocs/|/cfappman/|/SiteServer/|/webmail/|/nsn/|/servlet|/etc/passwd|/phpbb|/horde/|/administrator/|phpinfo|info\.php/|/cbms/|/readme\.html) {
 	return 301 $redirect_to;
 }
 
