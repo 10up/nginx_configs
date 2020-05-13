@@ -28,13 +28,12 @@ location ~* ^/wp-content/.*\.(php|phps)$ { return 301 $redirect_to; }
 location ~* ^/wp-content/uploads/.*\.php$ { return 301 $redirect_to; }
 
 # Block common exploit requests
-location ~* (/license\.txt|/phpmyadmin|/ckeditor|/hp/|/cfdocs/|/cfappman/|/SiteServer/|/webmail/|/nsn/|/servlet|/etc/passwd|/phpbb|/horde/|/administrator/|phpinfo|info\.php/|/cbms/|/readme\.html) {
+location ~* (/license\.txt|/phpmyadmin|/ckeditor|/hp/|/cfdocs/|/cfappman/|/SiteServer/|/webmail/|/nsn/|/servlet|/etc/passwd|/phpbb|/horde/|/administrator/|phpinfo|info\.php/|/cbms/|/readme\.html|readme\.md|readme\.txt|readme|composer\.json|composer\.lock|package\.json|package\.lock|license\.txt) {
 	return 301 $redirect_to;
 }
 
-
 # Block by file type
-location ~* \.(sql|sql\.gz|sql\.zip|tar|tar\.gz|lzma|pem|cer|crt|key|jks|asp|aspx|cgi|pwd|nsf|exe|sh|csh|pl|tmp|swp)$ {
+location ~* \.(sql|sql\.gz|sql\.zip|tar|tar\.gz|lzma|pem|cer|crt|key|jks|asp|aspx|cgi|pwd|nsf|exe|sh|csh|pl|tmp|swp|bak|bak2)$ {
 	return 301 $redirect_to;
 }
 
