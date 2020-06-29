@@ -4,7 +4,7 @@ Nginx Configuration Template
 10up uses [Nginx](http://nginx.org/) as it's standard webserver software on many high traffic, enterprise [WordPress](http://wordpress.org/) sites.  This repo is a collection of our configurations and optimizations for performance and security.  For most sites, these configurations can be included as-is in your Nginx server and http blocks.  For sites that need more customization, these configurations can serve as a reference.  
 
 <p align="center">
-<a href="http://10up.com/contact/"><img src="https://10updotcom-wpengine.s3.amazonaws.com/uploads/2016/10/10up-Github-Banner.png" width="850"></a>
+<a href="http://10up.com/contact/"><img src="https://10up.com/uploads/2016/10/10up-Github-Banner.png" width="850"></a>
 </p>
 
 ## Usage
