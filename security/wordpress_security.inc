@@ -39,16 +39,16 @@ location ~* \.(sql|sql\.gz|sql\.zip|tar|tar\.gz|lzma|pem|cer|crt|key|jks|asp|asp
 
 # Block access to wp-config.php and any files similarly named
 location ~* /wp-config {
-    return 301 $redirect_to;
+  return 301 $redirect_to;
 }
 
 # Block user enumeration to protect user names
 # By default, WordPress redirects example.com/?author=1 to example.com/author/username
-if ($args ~* author=[0-9]) {
+if ($arg_author ~* [0-9]) {
   return 301 $redirect_to;
 }
 
 # Prevent Nginx from announcing which version is running to the client.
 # Danger is minor from leaving this on, but reducing the amount of
-# invormation about the server environment is always good.
+# information about the server environment is always good.
 server_tokens off;
