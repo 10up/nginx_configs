@@ -21,6 +21,12 @@ location ~* wp-includes/js/tinymce/langs/.*\.php { deny all; }
 location ~* wp-includes/js/swfupload/swfupload\.swf { deny all; }
 location ~* ^/wp-includes/js/mediaelement/.*\.swf$ { deny all; }
 
+# Since wp-admin pages are not cached, block WordPress installation pages to 
+# avoid brute force attacks and for obscurity.
+# This will block the "5 minute" web-based install process and require WP-CLI or 
+# manual wp-config.php set-up for new installations.
+location ~* wp-admin/(install|setup-config)\.php$ { return 301 $redirect_to; }
+
 # Deny access to .php files in the /wp-content/ directory (including sub-folders)
 location ~* ^/wp-content/.*\.(php|phps)$ { return 301 $redirect_to; }
 
