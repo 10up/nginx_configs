@@ -10,6 +10,8 @@ Nginx Configuration Template
 ## Usage
 The `.inc` files in the `includes` and `security` directories are intended to be used as is with no modification.  For files like `blockxmlrpc.inc` that have options, these are controlled by variables that should be set in the `nginx.conf` file and the `.conf` file used for the specific site.  The `template` directory contains an example `nginx.conf` file and an `example.conf` file that contains the server block.  The `example.conf` file usually goes in the `/etc/nginx/conf.d/` directory or in the `/etc/nginx/sites-enabled/` directory.   
 
+Certain security rules block pages in WordPress that can impact expected behavior in some use-cases. Notably, the WordPress "5-minute" installation pages in `wp-admin` are blocked, which will prevent an initial installation from the browser, and sites using these configs must be created with a manual `wp-config.php` file and database import, or via the WP-CLI command line tool. 
+
 ## Installation
 The easiest way to use this repo is to clone it to your `/etc/nginx/` directory. All of the include file paths used in `/template/nginx.conf` and `/template/example.conf` will work without modification with this method:
 
