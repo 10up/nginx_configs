@@ -1,6 +1,10 @@
+	# prevent PHP path-walking exploit, remove if PHP files are on remote servers
 	try_files $uri =404;
+	
+	# enable and secure PATH_INFO variable
+	# activate PATH_INFO in php.ini with `cgi.fix_pathinfo = 1;`
 	fastcgi_split_path_info ^(.+\.php)(/.+)$;
-	#NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+	fastcgi_param PATH_INFO $fastcgi_path_info;
 
 	include /etc/nginx/fastcgi_params;
 	
