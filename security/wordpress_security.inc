@@ -50,7 +50,22 @@ location ~* /wp-config {
 
 # Block user enumeration to protect user names
 # By default, WordPress redirects example.com/?author=1 to example.com/author/username
-if ($args ~* author=[0-9]) {
+
+# we will always redirect...
+set $force_author_redirect 1;
+
+# unless there is no author param in the query params
+if ($args !~* author=[0-9]) {
+  set $force_author_redirect 0;
+}
+
+# or we are in the admin
+if ($uri ~* wp-admin) {
+  set $force_author_redirect 0;
+}
+
+# if both author is in the URL/query param then we are not in wp-admin redirect
+if ($force_author_redirect) {
   return 301 $redirect_to;
 }
 
